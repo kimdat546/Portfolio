@@ -10,9 +10,9 @@ const Landing = ({ children }: Props) => {
         <>
             <Background />
             <div className="relative">
-                {/* <Header /> */}
+                <Header />
                 <main>{children}</main>
-                {/* <Footer /> */}
+                <Footer />
             </div>
         </>
     );

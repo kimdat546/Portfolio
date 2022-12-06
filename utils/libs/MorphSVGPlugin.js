@@ -680,5 +680,5 @@ function(e) {
         return (_gsScope.GreenSockGlobals || _gsScope).MorphSVGPlugin
     };
     "undefined" != typeof module && module.exports ? (require("./TweenLite.js"),
-    module.exports = t()) : "function" == typeof define && define.amd && define(["TweenLite"], t)
+    module.exports = t()) : "function" == typeof define && define.amd && define(["./TweenLite.js"], t)
 }();

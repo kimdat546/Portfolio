@@ -2,7 +2,13 @@ import React from "react";
 import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import MorphSVGPlugin from "@/utils/libs/MorphSVGPlugin";
-type MyProps = {};
+import cx from "classnames";
+
+type MyProps = {
+    theme: string | undefined;
+    toggleTheme: () => void;
+    className?: string;
+};
 type MyState = {};
 class Bulb extends React.Component<MyProps, MyState> {
     componentDidMount() {
@@ -10,15 +16,13 @@ class Bulb extends React.Component<MyProps, MyState> {
         registerPlugin(Draggable, MorphSVGPlugin);
         let startX: number;
         let startY: number;
-
-        // const AUDIO = {
-        //     CLICK: new Audio("https://assets.codepen.io/605876/click.mp3"),
-        // };
-
-        const STATE = {
-            ON: false,
+        const AUDIO = {
+            CLICK: new Audio("https://assets.codepen.io/605876/click.mp3"),
         };
-
+        const STATE = {
+            ON: this.props.theme === "dark" ? false : true,
+        };
+        set(document.documentElement, { '--on': STATE.ON ? 1 : 0 });
         const CORD_DURATION = 0.1;
 
         const CORDS = document.querySelectorAll(".toggle-scene__cord");
@@ -37,17 +41,16 @@ class Bulb extends React.Component<MyProps, MyState> {
                 y: ENDY || 0,
             });
         };
-
         RESET();
-
         const CORD_TL = timeline({
             paused: true,
             onStart: () => {
                 STATE.ON = !STATE.ON;
-                set(document.documentElement, { "--on": STATE.ON ? 1 : 0 });
+                set(document.documentElement, { '--on': STATE.ON ? 1 : 0 });
                 set([DUMMY, HIT], { display: "none" });
                 set(CORDS[0], { display: "block" });
-                // AUDIO.CLICK.play();
+                this.props.toggleTheme();
+                AUDIO.CLICK.play();
             },
             onComplete: () => {
                 set([DUMMY, HIT], { display: "block" });
@@ -66,6 +69,7 @@ class Bulb extends React.Component<MyProps, MyState> {
                 })
             );
         }
+
         Draggable.create(PROXY, {
             trigger: HIT,
             type: "x,y",
@@ -103,7 +107,7 @@ class Bulb extends React.Component<MyProps, MyState> {
     render() {
         return (
             <svg
-                className="toggle-scene"
+                className={cx("toggle-scene", this.props.className)}
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="xMinYMin"
                 viewBox="0 0 197.451 481.081"

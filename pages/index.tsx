@@ -2,8 +2,8 @@ import {
     AirbnbIcon,
     FacebookIcon, PlanetariaIcon, StarbucksIcon
 } from "@/components";
-import CV from "@/public/NguyenKimDatResume.pdf";
-import { saveAs } from "file-saver";
+// import CV from "@/public/NguyenKimDatResume.pdf";
+// import { saveAs } from "file-saver";
 import Image from "next/image";
 import Link from "next/link";
 import { BsEnvelope } from "react-icons/bs";
@@ -105,8 +105,8 @@ const listWorks = [
 
 const Home = () => {
     const handleDownloadCV = () => {
-        const file = new Blob([CV], { type: "application/pdf" });
-        saveAs(file, "NguyenKimDatResume.pdf");
+        // const file = new Blob([CV], { type: "application/pdf" });
+        // saveAs(file, "NguyenKimDatResume.pdf");
     };
     return (
         <>
